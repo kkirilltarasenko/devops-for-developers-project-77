@@ -1,0 +1,4 @@
+.terraform
+.env
+secrets.tfvars
+authorized_key.json
