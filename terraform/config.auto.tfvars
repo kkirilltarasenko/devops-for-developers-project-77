@@ -1,0 +1,5 @@
+  zone = "ru-central1-d"
+  folder_id = "b1gpb55fm3qonqkrhnjd"
+  cloud_id = "b1g2he1deh01r61d309c"
+  path_to_authorized_key = "authorized_key.json"
+  ubuntu_image_id = "fd8kqcscn6ajs0if522o"

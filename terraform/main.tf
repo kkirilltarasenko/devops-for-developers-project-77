@@ -7,14 +7,9 @@ terraform {
   required_version = ">= 0.13"
 }
 
-locals {
-  folder_id = "b1g2he1deh01r61d309c"
-  cloud_id = "b1gpb55fm3qonqkrhnjd"
-}
-
 provider "yandex" {
-  zone = "ru-central1-d"
-  cloud_id = local.cloud_id
-  folder_id = local.folder_id
-  service_account_key_file = "../authorized_key.json"
+  zone = var.zone
+  cloud_id = var.cloud_id
+  folder_id = var.folder_id
+  service_account_key_file = var.path_to_authorized_key
 }
