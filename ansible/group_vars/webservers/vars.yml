@@ -1,0 +1,6 @@
+db_postgres: "{{ vault_db_postgres }}"
+db_database: "{{ vault_db_database }}"
+db_username: "{{ vault_db_username }}"
+db_password: "{{ vault_db_password }}"
+db_port: "{{ vault_db_port }}"
+datadog_api_key: "{{ vault_datadog_api_key }}"
