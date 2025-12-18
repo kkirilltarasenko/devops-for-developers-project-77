@@ -1,4 +1,5 @@
 .terraform
 .env
-secrets.tfvars
+.tfvars
 authorized_key.json
+vault_pass.txt

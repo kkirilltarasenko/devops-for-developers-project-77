@@ -1,20 +1,25 @@
 ---
-- name: Install monitoring on all hosts
+- name: Base servers setup
   hosts: all
   become: true
   gather_facts: true
-
   roles:
-    - role: datadog.dd.agent
+    - role: geerlingguy.docker
+      when: install_docker
 
-- name: Prepare webservers
+  # tasks:
+  #   - name: Install Python dependencies for Docker module
+  #     ansible.builtin.pip:
+  #       name:
+  #         - requests
+
+- name: Install monitoring and redmine on all hosts
   hosts: webservers
   become: true
   gather_facts: true
 
   roles:
-    - role: geerlingguy.docker
-      when: install_docker
+    - role: datadog.dd.agent
 
   tasks:
     - name: Create Redmine env file
@@ -22,11 +27,6 @@
         src: redmine.env.j2
         dest: /root/redmine.env
         mode: u=rw,go=
-
-    - name: Install Python dependencies for Docker module
-      ansible.builtin.pip:
-        name:
-          - requests
 
     - name: Run Redmine container
       community.docker.docker_container:

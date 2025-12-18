@@ -23,3 +23,21 @@ variable "ubuntu_image_id" {
     description = "Id of ubuntu image on yandex marketplace"
     type = string
 }
+
+variable "db_password" {
+    description = "Password to admin user in database"
+    type = string
+    sensitive = true
+}
+
+variable "ssh_path" {
+    description = "Path to ssh in local machine"
+    type = string
+    sensitive = true
+}
+
+variable "ssh_user" {
+    description = "Root user in vm"
+    type = string
+    sensitive = true
+}

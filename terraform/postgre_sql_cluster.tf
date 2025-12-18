@@ -28,3 +28,23 @@ resource "yandex_mdb_postgresql_cluster" "devops-77-postgresql-cluster" {
     subnet_id = yandex_vpc_subnet.subnet-1.id
   }
 }
+
+
+resource "yandex_mdb_postgresql_user" "kirillt" {
+  cluster_id = yandex_mdb_postgresql_cluster.devops-77-postgresql-cluster.id
+  name = "kirillt"
+  password = var.db_password
+  conn_limit = 50
+  settings = {
+    default_transaction_isolation = "read committed"
+    log_min_duration_statement = 5000
+  }
+}
+
+resource "yandex_mdb_postgresql_database" "my_db" {
+  cluster_id = yandex_mdb_postgresql_cluster.devops-77-postgresql-cluster.id
+  name = "db1"
+  owner = yandex_mdb_postgresql_user.kirillt.name
+  lc_collate = "en_US.UTF-8"
+  lc_type    = "en_US.UTF-8"
+}
