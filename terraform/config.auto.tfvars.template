@@ -1,0 +1,9 @@
+zone =
+folder_id =
+cloud_id =
+path_to_authorized_key =
+ssh_path =
+ssh_user =
+ubuntu_image_id =
+db_password =
+domain_zone =
