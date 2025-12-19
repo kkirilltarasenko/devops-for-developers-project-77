@@ -2,6 +2,8 @@
 
 [![Actions Status](https://github.com/kkirilltarasenko/devops-for-developers-project-77/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/kkirilltarasenko/devops-for-developers-project-77/actions)
 
+Ссылка на развернутое приложение: https://ktarasenko.online
+
 ## DevOps for Developers — Project 77
 
 Проект демонстрирует развёртывание и конфигурацию веб-приложения в Yandex Cloud
