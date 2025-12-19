@@ -3,3 +3,4 @@
 .tfvars
 authorized_key.json
 vault_pass.txt
+config.auto.tfvars

@@ -41,3 +41,8 @@ variable "ssh_user" {
     type = string
     sensitive = true
 }
+
+variable "domain_zone" {
+    description = "Domain zone for creating new DNS"
+    type = string
+}

@@ -7,12 +7,6 @@
     - role: geerlingguy.docker
       when: install_docker
 
-  # tasks:
-  #   - name: Install Python dependencies for Docker module
-  #     ansible.builtin.pip:
-  #       name:
-  #         - requests
-
 - name: Install monitoring and redmine on all hosts
   hosts: webservers
   become: true

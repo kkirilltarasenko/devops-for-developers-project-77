@@ -7,6 +7,7 @@ resource "yandex_lb_network_load_balancer" "devops-77-lb" {
       port = 80
       target_port = 8080
       external_address_spec {
+        address = yandex_vpc_address.devops-77-external-static-ip.external_ipv4_address[0].address
         ip_version = "ipv4"
       }
     }
@@ -16,6 +17,7 @@ resource "yandex_lb_network_load_balancer" "devops-77-lb" {
       port = 443
       target_port = 443
       external_address_spec {
+        address = yandex_vpc_address.devops-77-external-static-ip.external_ipv4_address[0].address
         ip_version = "ipv4"
       }
     }
