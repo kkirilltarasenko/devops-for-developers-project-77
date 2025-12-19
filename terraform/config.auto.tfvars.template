@@ -7,3 +7,4 @@ ssh_user =
 ubuntu_image_id =
 db_password =
 domain_zone =
+domain = 

@@ -46,3 +46,8 @@ variable "domain_zone" {
     description = "Domain zone for creating new DNS"
     type = string
 }
+
+variable "domain" {
+    description = "Main domain name"
+    type = string
+}
