@@ -51,3 +51,20 @@ variable "domain" {
     description = "Main domain name"
     type = string
 }
+
+variable "datadog_api_key" {
+    description = "Datadog api key"
+    type = string
+    sensitive = true
+}
+
+variable "datadog_app_key" {
+    description = "Datadog app key"
+    type = string
+    sensitive = true
+}
+
+variable "datadog_api_url" {
+    description = "Datadog api url"
+    type = string
+}
