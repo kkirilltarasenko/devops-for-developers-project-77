@@ -1,3 +1,17 @@
+terraform {
+  required_providers {
+    yandex = {
+      source = "yandex-cloud/yandex"
+    }
+
+    datadog = {
+      source = "DataDog/datadog"
+    }
+  }
+}
+
+
+
 provider "yandex" {
   zone = var.zone
   cloud_id = var.cloud_id
