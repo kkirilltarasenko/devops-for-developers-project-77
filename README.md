@@ -43,19 +43,23 @@ cd devops-for-developers-project-77
 
 ## Настройка Terraform
 
-## Перейдите в директорию terraform и создайте файл с переменными:
+## Генерация файла terraform.auto.tfvars:
 
 ```bash
-cp terraform/config.auto.tfvars.template terraform/config.auto.tfvars
+make ansible-terraform
 ```
 
-Заполните файл config.auto.tfvars, указав необходимые значения, включая:
+## Создание/Обновление инфраструктуры с помощью Terraform
 
-- cloud_id
-- folder_id
-- zone
-- domain_zone
-- ssh_public_key_path
+```bash
+make terraform-apply
+```
+
+## Удаление инфраструктуры с помощью Terraform
+
+```bash
+make terraform-desctroy
+```
 
 ## Настройка Ansible Vault
 
@@ -63,20 +67,6 @@ cp terraform/config.auto.tfvars.template terraform/config.auto.tfvars
 
 ```bash
 echo "<Your password here>" > ansible/vault_pass.txt
-```
-
-## Развёртывание инфраструктуры
-
-- Создание инфраструктуры в Yandex Cloud:
-
-```bash
-make apply
-```
-
-- Удаление инфраструктуры:
-
-```bash
-make apply
 ```
 
 - Деплой приложения после успешного создания инфраструктуры

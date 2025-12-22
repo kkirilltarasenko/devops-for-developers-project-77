@@ -1,15 +1,24 @@
-TERRAFORM_WORKDIR = terraform
+# Makefile в корне проекта
+
 ANSIBLE_WORKDIR = ansible
-INVENTORY = inventory.ini
-PLAYBOOK = playbook.yml
-VAULT_PASS_FILE = vault_pass.txt
+TERRAFORM_WORKDIR = terraform
 
-apply:
-	cd $(TERRAFORM_WORKDIR) && terraform apply
+.PHONY: ansible-terraform ansible-deploy terraform-init terraform-plan terraform-apply terraform-destroy
 
-destroy:
-	cd $(TERRAFORM_WORKDIR) && terraform destroy
+ansible-terraform:
+	make -C $(ANSIBLE_WORKDIR) terraform
 
-deploy:
-	cd $(ANSIBLE_WORKDIR) && ansible-playbook -i $(INVENTORY) $(PLAYBOOK) \
-	--vault-password-file $(VAULT_PASS_FILE)
+ansible-deploy:
+	make -C $(ANSIBLE_WORKDIR) deploy
+
+terraform-init:
+	make -C $(TERRAFORM_WORKDIR) init
+
+terraform-plan:
+	make -C $(TERRAFORM_WORKDIR) plan
+
+terraform-apply:
+	make -C $(TERRAFORM_WORKDIR) apply
+
+terraform-destroy:
+	make -C $(TERRAFORM_WORKDIR) destroy

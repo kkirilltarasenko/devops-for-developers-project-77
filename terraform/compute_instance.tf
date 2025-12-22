@@ -1,101 +1,41 @@
-resource "yandex_compute_instance" "devops-77-vm-1" {
-    name = "devops-77-vm-1"
-    platform_id = "standard-v3"
-    zone = var.zone
-    folder_id = var.folder_id
+resource "yandex_compute_disk" "disk" {
+  for_each = var.vms
 
-    resources {
-      cores = 2
-      memory = 2
-    }
-
-    boot_disk {
-      disk_id = yandex_compute_disk.disk-vm-1.id
-    }
-
-    network_interface {
-      subnet_id = yandex_vpc_subnet.subnet-1.id
-      nat = true
-    }
-
-    metadata = {
-      user-data = <<-EOF
-      #cloud-config
-      datasource:
-        Ec2:
-          strict_id: false
-      ssh_pwauth: no
-      users:
-        - name: ${var.ssh_user}
-          sudo: ALL=(ALL) NOPASSWD:ALL
-          shell: /bin/bash
-          ssh_authorized_keys:
-            - ${file(var.ssh_path)}
-      packages:
-        - python3
-        - python3-venv
-        - python3-pip
-        - python3-distutils
-      EOF
-    }
+  name      = "devops-77-disk-${each.key}"
+  type      = "network-ssd"
+  size      = 10
+  zone      = var.zone
+  image_id  = var.ubuntu_image_id
+  folder_id = var.folder_id
 }
 
-resource "yandex_compute_instance" "devops-77-vm-2" {
-    name = "devops-77-vm-2"
-    platform_id = "standard-v3"
-    zone = var.zone
-    folder_id = var.folder_id
+resource "yandex_compute_instance" "vm" {
+  for_each = var.vms
 
-    resources {
-      cores = 2
-      memory = 2
-    }
+  name        = "devops-77-${each.key}"
+  platform_id = "standard-v3"
+  zone        = var.zone
+  folder_id   = var.folder_id
 
-    boot_disk {
-      disk_id = yandex_compute_disk.disk-vm-2.id
-    }
+  resources {
+    cores  = 2
+    memory = 2
+  }
 
-    network_interface {
-      subnet_id = yandex_vpc_subnet.subnet-1.id
-      nat = true
-    }
+  boot_disk {
+    disk_id = yandex_compute_disk.disk[each.key].id
+  }
 
-    metadata = {
-      user-data = <<-EOF
-      #cloud-config
-      datasource:
-        Ec2:
-          strict_id: false
-      ssh_pwauth: no
-      users:
-        - name: ${var.ssh_user}
-          sudo: ALL=(ALL) NOPASSWD:ALL
-          shell: /bin/bash
-          ssh_authorized_keys:
-            - ${file(var.ssh_path)}
-      packages:
-        - python3.11
-        - python3.11-venv
-        - python3.11-pip
-        - python3.11-distutils
-      EOF
-    }
-}
+  network_interface {
+    subnet_id = yandex_vpc_subnet.subnet-1.id
+    nat       = true
+  }
 
-resource "yandex_compute_disk" "disk-vm-1" {
-    name = "devops-77-disk-1"
-    type = "network-ssd"
-    size = 10
-    zone = var.zone
-    image_id = var.ubuntu_image_id
-    folder_id = var.folder_id
-}
-
-resource "yandex_compute_disk" "disk-vm-2" {
-    name = "devops-77-disk-2"
-    type = "network-ssd"
-    size = 10
-    zone = var.zone
-    image_id = var.ubuntu_image_id
-    folder_id = var.folder_id
+  metadata = {
+    user-data = templatefile("${path.module}/cloud-init.yaml", {
+      ssh_user        = var.ssh_user
+      ssh_public_key = file(var.ssh_path)
+      packages        = each.value.python_packages
+    })
+  }
 }

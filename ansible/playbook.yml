@@ -1,4 +1,17 @@
 ---
+- name: Generate Terraform variables file
+  hosts: terraform
+  gather_facts: false
+  tags: terraform
+  vars:
+    terraform_vars_path: "../terraform/terraform.auto.tfvars"
+  tasks:
+    - name: Generate terraform.auto.tfvars
+      ansible.builtin.template:
+        src: terraform.tfvars.j2
+        dest: "{{ terraform_vars_path }}"
+        mode: "0644"
+
 - name: Base servers setup
   hosts: all
   become: true
