@@ -24,8 +24,14 @@ variable "ubuntu_image_id" {
     type = string
 }
 
+variable "db_user" {
+    description = "Username of target in database"
+    type = string
+    sensitive = true
+}
+
 variable "db_password" {
-    description = "Password to admin user in database"
+    description = "Password to target user in database"
     type = string
     sensitive = true
 }
@@ -67,4 +73,28 @@ variable "datadog_app_key" {
 variable "datadog_api_url" {
     description = "Datadog api url"
     type = string
+}
+
+variable "vms" {
+  type = map(object({
+    python_packages = list(string)
+  }))
+  default = {
+    vm-1 = {
+      python_packages = [
+        "python3",
+        "python3-venv",
+        "python3-pip",
+        "python3-distutils"
+      ]
+    }
+    vm-2 = {
+      python_packages = [
+        "python3.11",
+        "python3.11-venv",
+        "python3.11-pip",
+        "python3.11-distutils"
+      ]
+    }
+  }
 }

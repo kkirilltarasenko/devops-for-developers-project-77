@@ -1,5 +1,14 @@
+# Terraform
 .terraform
+terraform.tfstate.backup
+terraform.tfstate
+terraform.auto.tfvars
+
+# Secrets
 .env
 authorized_key.json
 vault_pass.txt
-config.auto.tfvars
+
+# Ide
+.vscode
+.idea

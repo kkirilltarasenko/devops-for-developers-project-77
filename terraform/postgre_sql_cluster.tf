@@ -32,7 +32,7 @@ resource "yandex_mdb_postgresql_cluster" "devops-77-postgresql-cluster" {
 
 resource "yandex_mdb_postgresql_user" "kirillt" {
   cluster_id = yandex_mdb_postgresql_cluster.devops-77-postgresql-cluster.id
-  name = "kirillt"
+  name = var.db_user
   password = var.db_password
   conn_limit = 50
   settings = {
