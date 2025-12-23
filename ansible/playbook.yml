@@ -10,15 +10,7 @@
       ansible.builtin.template:
         src: terraform.tfvars.j2
         dest: "{{ terraform_vars_path }}"
-        mode: "0644"
-
-- name: Base servers setup
-  hosts: all
-  become: true
-  gather_facts: true
-  roles:
-    - role: geerlingguy.docker
-      when: install_docker
+        mode: u=rw,g=r,o=r
 
 - name: Install monitoring and redmine on all hosts
   hosts: webservers
