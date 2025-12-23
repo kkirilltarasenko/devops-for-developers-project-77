@@ -34,7 +34,7 @@ resource "yandex_compute_instance" "vm" {
   metadata = {
     user-data = templatefile("${path.module}/cloud-init.yaml", {
       ssh_user        = var.ssh_user
-      ssh_public_key = file(var.ssh_path)
+      ssh_public_key = file(var.ssh_public_key)
       packages        = each.value.python_packages
     })
   }
