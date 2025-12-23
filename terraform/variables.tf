@@ -36,7 +36,7 @@ variable "db_password" {
     sensitive = true
 }
 
-variable "ssh_path" {
+variable "ssh_public_key" {
     description = "Path to ssh in local machine"
     type = string
     sensitive = true

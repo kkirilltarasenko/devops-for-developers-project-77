@@ -5,7 +5,6 @@ domain: ktarasenko.online
 folder_id: "{{ vault_folder_id }}"
 cloud_id: "{{ vault_cloud_id }}"
 path_to_authorized_key: "{{ vault_path_to_authorized_key }}"
-ssh_path: "{{ vault_ssh_path }}"
 ssh_user: "{{ vault_ssh_user }}"
 db_password: "{{ vault_db_password }}"
 db_user: "{{ vault_db_user }}"
